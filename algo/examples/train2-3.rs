@@ -9,31 +9,18 @@ fn main() {
         .map(|string| string.parse().unwrap())
         .collect();
 
-    let max = calc(&value_list);
+    let a = &value_list[0];
+    let b = &value_list[1];
+    let result = calc_pair(a, b);
 
-    let num = max;
-    println!("{}", num);
+    println!("{}", result);
 }
 
-fn calc(value_list: &Vec<i32>) -> &i32 {
-    let ones_place = value_list
-        .iter()
-        .reduce(|acc, value| acc.compare_ones_place_min(value))
-        .unwrap();
-    ones_place
-}
-
-trait CompareOnesPlaceMin {
-    fn compare_ones_place_min<'a>(&'a self, value: &'a i32) -> &'a i32;
-}
-
-impl CompareOnesPlaceMin for i32 {
-    fn compare_ones_place_min<'a>(&'a self, value: &'a i32) -> &'a i32 {
-        if *self % 10 < value % 10 {
-            self
-        } else {
-            value
-        }
+fn calc_pair<'a>(a: &'a i32, b: &'a i32) -> &'a i32 {
+    if a%10 < b % 10 {
+        a
+    } else {
+        b
     }
 }
 
